@@ -1,3 +1,4 @@
+# Common Lisp compilation files
 *.FASL
 *.fasl
 *.lisp-temp
