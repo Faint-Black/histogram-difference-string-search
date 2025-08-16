@@ -16,3 +16,7 @@
 *.sx32fsl
 *.wx64fsl
 *.wx32fsl
+
+# C output files
+*.o
+*.so
