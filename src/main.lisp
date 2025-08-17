@@ -9,7 +9,7 @@
 
 ;; Turns the input dictionary file into a list of usable strings
 (load "dictionary.lisp")
-;; Defines the string similarity score function
+;; Defines the FFI string similarity score function
 (load "histogram.lisp")
 
 (defun sort-tuples(TUPLE-LIST)
@@ -29,3 +29,5 @@
   (sort-tuples
    (make-tuple-list
     INPUT-WORD (parse-dictionary DICT-FILEPATH))))
+
+;; TODO: "reac" -> "react"

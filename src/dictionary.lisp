@@ -5,17 +5,8 @@
 (defun normalize-character(CHARACTER)
   "Takes in a character and outputs a normalized-form character, any lowercase gets converted to uppercase, any non-character gets converted to whitespace"
   (cond
-    ;; is lowercase character, return the uppercase form
-    ((and
-      (>= (char-code CHARACTER) (char-code #\a))
-      (<= (char-code CHARACTER) (char-code #\z)))
-     (char-upcase CHARACTER))
-    ;; is uppercase character, return as is
-    ((and
-      (>= (char-code CHARACTER) (char-code #\A))
-      (<= (char-code CHARACTER) (char-code #\Z)))
-     CHARACTER)
-    ;; is not a character, return whitespace
+    ((<= (char-code #\a) (char-code CHARACTER) (char-code #\z)) (char-upcase CHARACTER))
+    ((<= (char-code #\A) (char-code CHARACTER) (char-code #\Z)) CHARACTER)
     (t #\Space)))
 
 (defun normalize-word(STRING)

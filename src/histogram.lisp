@@ -4,7 +4,7 @@
 
 (sb-alien:load-shared-object "./lib/libhistogram.so")
 
-;; similarity score function
+;; import pre-compiled C function
 (sb-alien:define-alien-routine
     ("string_similarity_score" c-similarity-score)
     sb-alien:int

@@ -6,6 +6,40 @@ Implemented in Common Lisp + C.
 
 ---
 
+## The Algorithm:
+1. Consider the input strings, sanitized to only include letters and whitespaces:
+```
+let str1 = normalize_string("aB1cd");
+    => "AB CD"
+let str2 = normalize_string("ab&CcD");
+    => "AB CCD"
+```
+
+2. The first step of the algorithms would involve turning these strings into histograms based on the frequency of their letters:
+```
+let hist1 = histogram_from_str(str1);
+    => [A:1, B:1, C:1, D:1, E:0, F:0, [...], Y:0, Z:0, NonLetter:1]
+let hist2 = histogram_from_str(str2);
+    => [A:1, B:1, C:2, D:1, E:0, F:0, [...], Y:0, Z:0, NonLetter:1]
+```
+
+3. Then, the difference of each slot is calculated individually into a new histogram, since negative values can cancel out positive values on the next step, only the absolute of the difference is extracted.
+```
+let hist_diff = histogram_difference(hist1, hist2);
+    => [A:0, B:0, C:1, D:0, E:0, F:0, [...], Y:0, Z:0, NonLetter:0]
+```
+
+4. Afterwards, the entire histogram is collapsed into a single integer scalar by summing each slot.
+```
+let score = histogram_reduce(hist_diff);
+    => 1
+```
+
+The closer to zero this score is, the more similar the 2 strings are.
+In this case, 1 is a very similar match score, but the strings "Aardvark" and "Zebra" generate a score of 9, indicating a stark difference.
+
+---
+
 ## Possible Dependencies:
 The following setup may be required for you to run the code:
 * **Editor:** Emacs
