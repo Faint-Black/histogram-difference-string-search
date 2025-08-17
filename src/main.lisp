@@ -12,6 +12,10 @@
 ;; Defines the string similarity score function
 (load "histogram.lisp")
 
-(defun main(FILEPATH)
-  "Execute me!"
-  (parse-dictionary FILEPATH))
+(defun main(DICT-FILEPATH WORD)
+  "Given a dictionary, check which word is the most similar to the input string"
+  (sort
+   (mapcar
+    (lambda(x) (list x (c-similarity-score WORD x)))
+    (parse-dictionary DICT-FILEPATH))
+   #'< :key #'second))

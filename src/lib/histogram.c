@@ -9,6 +9,24 @@ typedef struct Histogram
   int char_count[HISTOGRAM_LEN];
 } Histogram;
 
+/* All accessible functions in this library */
+Histogram histogram_init (void);
+Histogram histogram_from_str (char const *);
+Histogram histogram_difference (Histogram, Histogram);
+int histogram_reduce (Histogram);
+int string_similarity_score (char const *, char const *);
+
+/* Returns the absolute value of an integer */
+static int
+abs (int n)
+{
+  if (n < 0)
+    {
+      return -n;
+    }
+  return n;
+}
+
 Histogram
 histogram_init (void)
 {
@@ -21,6 +39,7 @@ histogram_init (void)
   return histogram;
 }
 
+/* Creates a histogram from a string */
 Histogram
 histogram_from_str (char const *str)
 {
@@ -48,18 +67,22 @@ histogram_from_str (char const *str)
   return histogram;
 }
 
+/* Evaluates another histogram with the difference of all entries */
 Histogram
 histogram_difference (Histogram h1, Histogram h2)
 {
   Histogram histogram_diff;
+  int diff;
   int i;
   for (i = 0; i < HISTOGRAM_LEN; i++)
     {
-      histogram_diff.char_count[i] = h1.char_count[i] - h2.char_count[i];
+      diff = h1.char_count[i] - h2.char_count[i];
+      histogram_diff.char_count[i] = abs (diff);
     }
   return histogram_diff;
 }
 
+/* Reduces all the values into a single integer by summming */
 int
 histogram_reduce (Histogram histogram)
 {
@@ -72,6 +95,7 @@ histogram_reduce (Histogram histogram)
   return reduce;
 }
 
+/* Evaluates the reduced histogram difference between the two arg strings */
 int
 string_similarity_score (char const *str1, char const *str2)
 {
