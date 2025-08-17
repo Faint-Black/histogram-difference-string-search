@@ -1,15 +1,16 @@
 /* Source for the library that will be used by the Common Lisp script
-   through the sbcl's FFI.  */
+ * through the sbcl's alien-routine FFI.
+ */
 
-#define NONCHAR_INDEX 26
 #define HISTOGRAM_LEN 27
+#define NOT_A_LETTER_INDEX 26
 
 typedef struct Histogram
 {
   int char_count[HISTOGRAM_LEN];
 } Histogram;
 
-/* All accessible functions in this library */
+/* All externally accessible functions in this library */
 Histogram histogram_init (void);
 Histogram histogram_from_str (char const *);
 Histogram histogram_difference (Histogram, Histogram);
@@ -27,6 +28,7 @@ abs (int n)
   return n;
 }
 
+/* Init with zeroes */
 Histogram
 histogram_init (void)
 {
@@ -45,23 +47,23 @@ histogram_from_str (char const *str)
 {
   Histogram histogram = histogram_init ();
   char c;
-  int index = NONCHAR_INDEX;
+  int index = NOT_A_LETTER_INDEX;
   while (*str)
     {
       c = *str;
       if ((c >= 'a') && (c <= 'z'))
         {
-          index = c - 97;
+          index = c - 'a';
         }
       else if ((c >= 'A') && (c <= 'Z'))
         {
-          index = c - 65;
+          index = c - 'A';
         }
       else
         {
-          index = NONCHAR_INDEX;
+          index = NOT_A_LETTER_INDEX;
         }
-      ++str;
+      str++;
       histogram.char_count[index] += 1;
     }
   return histogram;

@@ -1,5 +1,8 @@
 # Histogram Difference String Search
-An algorithm that recommends the closest auto-completion to a string with a histogram difference of each individual character. Implemented in Common Lisp.
+An algorithm that quickly determines the similarity score between two strings, 
+meant as a mostly conceptual demonstration of a fast user search-bar auto-completion suggestion algorithm by just counting the number of instances of each character of a string and seeing how many of them match by calculating the difference.
+
+Implemented in Common Lisp + C.
 
 ---
 
@@ -20,4 +23,9 @@ chmod +x buildlib.sh
 ./buildlib.sh
 ```
 
-After that, open a REPL, load the main.lisp file, then run any function you wish.
+After that, open a REPL, load the `main.lisp` file, then run the main function, like so:
+```
+REPL> (main "./path/to/dictionary" "foobar")
+```
+This should return a list of tuples that correspond to the dictionary words and their respective similarity scores with your provided string.
+The closer to 0, the more similar the two strings are.

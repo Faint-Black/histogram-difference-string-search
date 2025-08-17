@@ -1,5 +1,5 @@
 ;;-----------------------------------------------------------------------------
-;;  Defines the FFI responsible for integrating the pre-compiled C functions
+;;  Defines the FFI for integrating the pre-compiled C functions
 ;;-----------------------------------------------------------------------------
 
 (sb-alien:load-shared-object "./lib/libhistogram.so")
