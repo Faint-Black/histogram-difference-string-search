@@ -30,4 +30,3 @@
    (make-tuple-list
     INPUT-WORD (parse-dictionary DICT-FILEPATH))))
 
-;; TODO: "reac" -> "react"
