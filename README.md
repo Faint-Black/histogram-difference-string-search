@@ -66,8 +66,7 @@ The following setup may be required for you to run the code:
 First, you need to compile the C code to generate a shared object library that the Lisp code depends on:
 ```sh
 cd src/lib/
-chmod +x buildlib.sh
-./buildlib.sh
+make
 ```
 
 After that, open a REPL, load the `main.lisp` file, then run the main function, like so:
